@@ -85,7 +85,9 @@ Check status with `:checkhealth vim.lsp` (`:LspInfo` no longer exists).
 Changed lines get a coloured bar in the sign column vs the git index: `┃`
 added / changed, `_` deleted, `‾` deleted line above, `~` changed-and-deleted,
 `┆` untracked. Already-staged changes show the same bars in a dimmer shade.
-Colours come from the vscode theme's git palette. Active in git repos only.
+Deletion signs show the number of removed lines as a superscript (`⁺` means
+10+). Colours come from the vscode theme's git palette. Active in git repos
+only.
 
 | Key          | Action                                            |
 |--------------|---------------------------------------------------|

@@ -9,18 +9,31 @@ return {
     signs = {
       add          = { text = "┃" },
       change       = { text = "┃" },
-      delete       = { text = "_" },
-      topdelete    = { text = "‾" },
-      changedelete = { text = "~" },
+      delete       = { text = "_", show_count = true },
+      topdelete    = { text = "‾", show_count = true },
+      changedelete = { text = "~", show_count = true },
       untracked    = { text = "┆" },
     },
     -- dimmer bars for changes already staged (shown alongside unstaged ones)
     signs_staged = {
       add          = { text = "┃" },
       change       = { text = "┃" },
-      delete       = { text = "_" },
-      topdelete    = { text = "‾" },
-      changedelete = { text = "~" },
+      delete       = { text = "_", show_count = true },
+      topdelete    = { text = "‾", show_count = true },
+      changedelete = { text = "~", show_count = true },
+    },
+    -- superscript digits for the deletion counts (default is plain 1-9)
+    count_chars = {
+      [1]  = "¹",
+      [2]  = "²",
+      [3]  = "³",
+      [4]  = "⁴",
+      [5]  = "⁵",
+      [6]  = "⁶",
+      [7]  = "⁷",
+      [8]  = "⁸",
+      [9]  = "⁹",
+      ["+"] = "⁺", -- fallback for 10+ deleted lines
     },
     -- signs only; no whole-line background tint
     linehl = false,
