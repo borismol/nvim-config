@@ -19,6 +19,10 @@ vim.opt.number = true
 -- vim.opt.relativenumber = true
 vim.opt.cursorline = true
 
+-- Keep the cursor line vertically centred while moving (typewriter mode);
+-- clamps at file top/bottom, so gg/G still behave normally
+vim.opt.scrolloff = 999
+
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
