@@ -61,9 +61,7 @@ return {
         disable_nvimtree_bg = true,     -- Clean up NvimTree's background
         terminal_colors = true,         -- Apply theme to terminal windows
 
-        color_overrides = {
-          vscLineNumber = '#FFFFFF',    -- Pure white line numbers
-        },
+        color_overrides = {},
 
         group_overrides = {
           -- Custom neon green cursor block using fetched colors
