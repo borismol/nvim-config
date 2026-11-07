@@ -28,6 +28,14 @@ return {
     config.opts.ask.snacks.win.keys.c_g =
       { "<C-g>", "cancel", mode = { "i", "n" }, desc = "cancel" }
 
+    -- Canceling a prompt runs `normal! gv` (Context:resume), re-selecting the
+    -- last visual selection and stranding you in Visual mode. Keep only the
+    -- highlight cleanup and skip the selection restore.
+    local Context = require("opencode.context")
+    Context.resume = function(self)
+      self:clear()
+    end
+
     -- Recommended/example keymaps
     vim.keymap.set({ "n", "x" }, "<C-a>",   function() require("opencode").ask("@this: ") end,                    { desc = "Ask OpenCode…" })
     vim.keymap.set({ "n", "x" }, "<C-x>",   function() require("opencode").select() end,                          { desc = "Select OpenCode…" })
