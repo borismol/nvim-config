@@ -20,8 +20,10 @@ return {
         end,
       })
 
-      -- 2. Statically configure clangd using the modern Neovim API
+      -- 2. Configure language servers using the modern Neovim API
       -- This modifies Neovim's internal data layer without hitting the deprecated wrapper
+
+      -- C/C++: clangd
       vim.lsp.config("clangd", {
         cmd = {
           "clangd",
@@ -34,8 +36,25 @@ return {
         },
       })
 
-      -- 3. Actively turn on clangd for its supported file types (.cpp, .hpp, etc.)
-      vim.lsp.enable("clangd")
+      -- Python: basedpyright (type checking, completion, navigation)
+      -- Requires: uv tool install basedpyright
+      vim.lsp.config("basedpyright", {
+        cmd = { "basedpyright-langserver", "--stdio" },
+        settings = {
+          basedpyright = {
+            analysis = {
+              -- basedpyright defaults to "recommended" which is quite strict;
+              -- "standard" matches pyright's noise level. Raise if you want more.
+              typeCheckingMode = "standard",
+              -- Report hint-level diagnostics (unresolved imports, etc.) below code
+              diagnosticMode = "openFilesOnly",
+            },
+          },
+        },
+      })
+
+      -- 3. Actively turn on the servers for their supported file types
+      vim.lsp.enable({ "clangd", "basedpyright" })
     end,
   },
 }

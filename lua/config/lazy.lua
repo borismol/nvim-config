@@ -24,6 +24,20 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 
+-- Python uses 4-space indentation (PEP 8); everything else keeps the global 2
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "python",
+  callback = function()
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.tabstop = 4
+    vim.opt_local.softtabstop = 4
+  end,
+})
+
+-- Make sure ~/.local/bin (uv tools: ruff, basedpyright) is on PATH even when
+-- nvim is launched from a GUI that doesn't source the shell profile
+vim.env.PATH = vim.env.HOME .. "/.local/bin:" .. (vim.env.PATH or "")
+
 vim.diagnostic.config({
   virtual_text = true,          -- текст ошибки рядом со строкой
   signs = true,                 -- значки слева (в gutter)
