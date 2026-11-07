@@ -6,8 +6,27 @@ return {
   config = function()
     ---@type opencode.Opts
     vim.g.opencode_opts = {
-      -- Your configuration, if any; goto definition on the type for details
+      ask = {
+        snacks = {
+          win = {
+            keys = {
+              -- Without this, ESC in normal mode cancels the prompt, and
+              -- opencode's cancel handler runs `gv`, leaving you in Visual
+              -- mode over a stale selection. Cancel deliberately with q/<C-g>.
+              n_esc = false,
+            },
+          },
+        },
+      },
     }
+
+    -- <C-g> cancels the prompt from both insert and normal mode.
+    -- Keymap specs mix string and integer keys, which `vim.g` cannot hold
+    -- (E5100), so set them directly on the config module — the approach
+    -- opencode.nvim's docs recommend for snacks options (neovim #12544).
+    local config = require("opencode.config")
+    config.opts.ask.snacks.win.keys.c_g =
+      { "<C-g>", "cancel", mode = { "i", "n" }, desc = "cancel" }
 
     -- Recommended/example keymaps
     vim.keymap.set({ "n", "x" }, "<C-a>",   function() require("opencode").ask("@this: ") end,                    { desc = "Ask OpenCode…" })
