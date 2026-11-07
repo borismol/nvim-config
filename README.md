@@ -16,6 +16,7 @@ lua/plugins/             # one file per plugin (auto-imported by lazy.nvim)
   treesitter.lua         # parsers + highlighting
   conform.lua            # formatting
   lint.lua               # linting
+  gitsigns.lua           # git change marks in the gutter, hunk actions
   snacks.lua             # floating input UI (for opencode prompts)
   opencode.lua           # OpenCode AI integration
   preview-markdown.lua   # browser markdown preview
@@ -78,6 +79,22 @@ Check status with `:checkhealth vim.lsp` (`:LspInfo` no longer exists).
 - Python: **ruff** — organize imports + format **on save**; manual with `<leader>fm`
 - Linting diagnostics refresh on open/save/leaving insert mode
 - Markdown preview: `:MarkdownPreview` / `:MarkdownPreviewStop`
+
+## Git change indicators (gitsigns)
+
+Changed lines get a coloured bar in the sign column vs the git index: `┃`
+added / changed, `_` deleted, `‾` deleted line above, `~` changed-and-deleted,
+`┆` untracked. Already-staged changes show the same bars in a dimmer shade.
+Colours come from the vscode theme's git palette. Active in git repos only.
+
+| Key          | Action                                            |
+|--------------|---------------------------------------------------|
+| `]h` / `[h`  | next / previous hunk                              |
+| `<leader>gp` | preview the hunk under cursor                     |
+| `<leader>gd` | diff split: buffer vs HEAD (uncommitted changes)  |
+| `<leader>gb` | blame popup for the line under cursor             |
+| `<leader>hs` | stage hunk                                        |
+| `<leader>hr` | reset (revert) hunk                               |
 
 ## OpenCode AI (`opencode.nvim`)
 
